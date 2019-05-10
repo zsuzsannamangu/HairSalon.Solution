@@ -28,5 +28,17 @@ namespace HairSalon.Controllers
       List<Stylist> allStylists = Stylist.GetAll();
       return View("Index", allStylists);
     }
+
+    [HttpGet("/stylists/{id}")]
+    public ActionResult Show()
+    {
+      return View();
+      // Dictionary<string, object> model = new Dictionary<string, object>();
+      // Stylist selectedStylist = Stylist.Find(id);
+      // List<Client> stylistsClients = selectedStylist.GetClients();
+      // model.Add("stylist", selectedStylist);
+      // model.Add("clients", stylistsClients);
+      // return View(model);
+    }
   }
 }

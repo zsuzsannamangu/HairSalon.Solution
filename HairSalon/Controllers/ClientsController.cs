@@ -8,11 +8,11 @@ namespace HairSalon.Controllers
   public class ClientsController : Controller
   {
 
-    [HttpGet("/categories")]
+    [HttpGet("/clients")]
     public ActionResult Index()
     {
-      List<Category> allCategories = Category.GetAll();
-      return View(allCategories);
+      List<Stylist> allStylists = Stylist.GetAll();
+      return View(allStylists);
     }
   }
 }

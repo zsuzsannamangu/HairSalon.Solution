@@ -1,9 +1,11 @@
-<h3>Here are all the details of @stylist.GetName():</h3>
+// <h3>Here are all the details of @stylist.GetName():</h3>
+<h3>See more information about selected stylist</h3>
 
 <ol>
-@foreach (var client in @Model["clients"])
+@foreach (var stylist in @Model["stylists"])
 {
-  <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetDescription()</a></li>
+  <li>@stylist.GetStylistName()</li>
+  // <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></li>
 }
 </ol>
 
