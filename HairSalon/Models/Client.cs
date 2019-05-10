@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using MySql.Data.MySqlClient;
-//this above accesses the SQL methods used in ClearAll()
 
 namespace HairSalon.Models
 {
@@ -65,5 +64,25 @@ namespace HairSalon.Models
       return allClients;
     }
 
+    public void Save()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"INSERT INTO clients (name) VALUES (@clientName);";
+      // cmd.Parameters.AddWithValue("@stylistName", _name);
+      MySqlParameter name = new MySqlParameter();
+      name.ParameterName = "@clientName";
+      name.Value = this._name;
+      cmd.Parameters.Add(name);
+      cmd.ExecuteNonQuery();
+      _id = (int) cmd.LastInsertedId;
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
   }
 }

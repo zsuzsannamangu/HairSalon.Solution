@@ -2,6 +2,8 @@
 
 <form action='/stylists/@Model.GetId()/clients' method='post'>
   <input id='stylistId' name='stylistId' type='hidden' value='@Model.GetId()'>
+  <label for='clientName'>Client name</label>
+  <input id='clientName' name='clientName' type='text'>
   <label for='clientPhone'>Client phone number</label>
   <input id='clientPhone' name='clientPhone' type='number'>
   <button type='submit'>Add client</button>
