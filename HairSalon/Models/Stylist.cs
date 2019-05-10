@@ -39,11 +39,6 @@ namespace HairSalon.Models
       _instances.Clear();
     }
 
-    // public static List<Stylist> GetAll()
-    // {
-    //   return _instances;
-    // }
-
     public static Stylist Find(int searchId)
     {
       return _instances[searchId-1];
