@@ -1,0 +1,13 @@
+<h1>Add a new client to @Model.GetName()</h1>
+
+<form action='/stylists/@Model.GetId()/clients' method='post'>
+  <input id='stylistId' name='stylistId' type='hidden' value='@Model.GetId()'>
+  <label for='clientAddress'>Client address</label>
+  <input id='clientAddress' name='clientAddress' type='text'>
+  <label for='clientPhone'>Client phone number</label>
+  <input id='clientPhone' name='clientPhone' type='number'>
+  <button type='submit'>Add client</button>
+</form>
+
+<p><a href='/stylists'>Return to stylist list</a></p>
+<p><a href='/'>Return to Main Page</a></p>
