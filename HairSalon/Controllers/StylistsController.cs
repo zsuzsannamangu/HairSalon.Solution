@@ -30,15 +30,16 @@ namespace HairSalon.Controllers
     }
 
     [HttpGet("/stylists/{id}")]
-    public ActionResult Show()
+    public ActionResult Show(int id)
     {
-      return View();
-      // Dictionary<string, object> model = new Dictionary<string, object>();
-      // Stylist selectedStylist = Stylist.Find(id);
-      // List<Client> stylistsClients = selectedStylist.GetClients();
-      // model.Add("stylist", selectedStylist);
-      // model.Add("clients", stylistsClients);
-      // return View(model);
+
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Stylist selectedStylist = Stylist.Find(id);
+      List<Client> stylistsClients = selectedStylist.GetClients();
+      model.Add("stylist", selectedStylist);
+      model.Add("clients", stylistsClients);
+      return View(model);
+
     }
   }
 }
