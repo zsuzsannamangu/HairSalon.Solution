@@ -2,16 +2,28 @@
   Layout = "_Layout";
 }
 
-@* <h3>Here are all the details of @stylist.GetStylistName():</h3> *@
+<h3>Here are all the details of @Model["stylist"].GetStylistName():</h3>
 
 <ol>
-@foreach (var stylist in @Model["stylists"])
+@foreach (var client in @Model["clients"])
 {
-  <li>@stylist.GetStylistName()</li>
-  // <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetName()</a></li>
+  <li>Client Name: @client.GetClientName() <br>Phone Number: @client.GetPhone()</li>
+  /* <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetClientName()</a></li> */
 }
 </ol>
 
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
 <p><a href='/stylists'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
+
+@* <ol>
+@foreach (var stylist in @Model)
+{
+  <li>@stylist.GetStylistName()</li>
+  // <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetClientName()</a></li>
+}
+</ol> *@
+
+@* <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
+<p><a href='/stylists'>Return to stylist list</a></p>
+<p><a href='/'>Return to Main Page</a></p> *@

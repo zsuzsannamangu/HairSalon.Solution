@@ -1,5 +1,6 @@
 @{
   Layout = "_Layout";
+  ViewData["Message"] = "Meet our Stylists!";
 }
 
 <h1>Stylists</h1>
@@ -11,7 +12,7 @@
 
 @foreach (var stylist in Model)
 {
-  <h3><a href='/stylists/@stylist.GetId()'>@stylist.GetName()</a></h3>
+  <h3><a href='/stylists/show/@stylist.GetId()'>@stylist.GetStylistName()</a></h3>
 }
 
 <p><a href='/'>Back home</a></p>
