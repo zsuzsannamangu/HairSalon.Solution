@@ -6,6 +6,15 @@
 <hr>
 <h4>Name: @Model["selectedClient"].GetClientName()</h4>
 <h4>Phone: @Model["selectedClient"].GetPhone()</h4>
-<p><a href="">Delete this client</a></p>
-<p><a href="">Edit name</a><p>
-<p><a href="">Edit phone</a><p>
+
+<form action= '/stylists/@Model["selectedStylist"].GetId()/clients/@Model["selectedClient"].GetId()/delete' method="post">
+  <button type="submit" name="button"> Delete this client </button>
+</form>
+<br>
+<form action= '/stylists/@Model["selectedStylist"].GetId()/clients/@Model["selectedClient"].GetId()/edit' method="post">
+  <button type="submit" name="button"> Edit name of client </button>
+</form>
+<br>
+<form action= '/stylists/@Model["selectedStylist"].GetId()/clients/@Model["selectedClient"].GetId()/edit' method="post">
+  <button type="submit" name="button"> Edit phone of client </button>
+</form>

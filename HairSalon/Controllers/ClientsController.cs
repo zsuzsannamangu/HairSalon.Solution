@@ -52,26 +52,25 @@ namespace HairSalon.Controllers
     [HttpPost("/stylists/{stylistId}/clients/{clientId}/delete")]
     public ActionResult Delete(int stylistId, int clientId)
     {
-      Client client = Client.Find(clientId);
-      client.Delete();
       Dictionary<string, object> model = new Dictionary<string, object>();
-      Stylist stylist = Stylist.Find(stylistId);
-      model.Add("stylist", stylist);
-      model.Add("client", client);
+      Stylist selectedStylist = Stylist.Find(stylistId);
+      Client selectedClient = Client.Find(clientId);
+      client.Delete();
+      model.Add("selectedStylist", selectedStylist);
+      model.Add("selectedClient", selectedClient);
       return Redirect("/stylists");
     }
 
-    //
-    // HttpGet("/stylists/{stylistId}/items/{itemId}/edit")]
-    // public ActionResult Edit(int categoryId, int itemId)
-    // {
-    //   Dictionary<string, object> model = new Dictionary<string, object>();
-    //   Category category = Category.Find(categoryId);
-    //   model.Add("category", category);
-    //   Item item = Item.Find(itemId);
-    //   model.Add("item", item);
-    //   return View(model);
-    // }
+    [HttpGet("/stylists/{stylistId}/clients/{clientId}/edit")]
+    public ActionResult Edit(int stylistId, int clientId)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Stylist selectedStylist = Stylist.Find(stylistId);
+      Client selectedClient = Client.Find(clientId);
+      model.Add("selectedStylist", selectedStylist);
+      model.Add("selectedClient", selectedClient);
+      return View(model);
+    }
 
   }
 }
