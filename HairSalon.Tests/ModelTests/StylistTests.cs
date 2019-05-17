@@ -142,6 +142,23 @@ namespace HairSalon.Tests
       Assert.AreEqual(testId, result);
     }
 
+    [TestMethod]
+    public void Edit_UpdatesStylistInDatabase_String()
+    {
+      //Arrange
+      string firstBio = "She likes cats.";
+      Stylist testStylist = new Stylist(firstBio);
+      testStylist.Save();
+      string secondBio = "She likes dogs.";
+
+      //Act
+      testStylist.Edit(secondBio);
+      string result = Stylist.Find(testStylist.GetStylistId()).GetBio();
+
+      //Assert
+      Assert.AreEqual(secondBio, result);
+    }
+
     // [TestMethod]
     // public void Test_AddClient_AddsClientToStylist()
     // {
@@ -182,6 +199,8 @@ namespace HairSalon.Tests
     //   //Assert
     //   CollectionAssert.AreEqual(testList, savedClients);
     // }
+
+
 
   }
 }
