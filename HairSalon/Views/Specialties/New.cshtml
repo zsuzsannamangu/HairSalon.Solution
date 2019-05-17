@@ -1,0 +1,17 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Add a specialty</h1>
+<p>Add a specialty here:</p>
+
+<form action="/specialties" method="post">
+  <label for="name">Specialty</label>
+  <input id="name" name="name" type="text">
+  <label for="price">Price</label>
+  <input id="price" name="price" type="text">
+  <button type="submit">Add</button>
+</form>
+
+<p><a href="/">Back home</a></p>
+<p><a href="/specialties">Back to specialties</a></p>

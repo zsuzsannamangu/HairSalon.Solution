@@ -30,7 +30,7 @@ namespace HairSalon.Controllers
       return View("Index", allStylists);
     }
 
-    [HttpGet("/stylists/show/{id}")]
+    [HttpGet("/stylists/{id}")]
     public ActionResult Show(int id)
     {
       // Stylist model = Stylist.Find(id);
