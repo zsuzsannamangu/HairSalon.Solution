@@ -149,5 +149,66 @@ namespace HairSalon.Models
       }
       return clients;
     }
+
+    public void AddSpecialty(Specialty newSpecialty)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+
+      cmd.CommandText = @"INSERT INTO services (stylists_id, specialties_id) VALUES (@StylistId, @SpecialtyId);";
+
+      MySqlParameter stylists_id = new MySqlParameter();
+      stylists_id.ParameterName = "@StylistId";
+      stylists_id.Value = _id;
+      cmd.Parameters.Add(stylists_id);
+
+      MySqlParameter specialties_id = new MySqlParameter();
+      specialties_id.ParameterName = "@SpecialtyId";
+      specialties_id.Value = newSpecialty._specialtyId;
+      cmd.Parameters.Add(specialties_id);
+
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
+    public List<Specialty> GetSpecialties()
+    {
+        MySqlConnection conn = DB.Connection();
+        conn.Open();
+        MySqlCommand cmd = conn.CreateCommand() as MySqlCommand;
+
+        cmd.CommandText = @"SELECT specialties.* FROM stylists
+            JOIN services ON (stylists.id = services.stylists_id)
+            JOIN specialties ON (services.specialties_id = specialties.id)
+            WHERE stylists.id = @StylistId;";
+
+        MySqlParameter stylistIdParameter = new MySqlParameter();
+        stylistIdParameter.ParameterName = "@StylistId";
+        stylistIdParameter.Value = _id;
+        cmd.Parameters.Add(stylistIdParameter);
+
+        MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
+
+        List<Specialty> specialties = new List<Specialty>{};
+        while(rdr.Read())
+        {
+          // int specialtiesId = rdr.GetInt32(0);
+          string specialtyName = rdr.GetString(1);
+          string specialtyPrice = rdr.GetString(2);
+          Specialty newSpecialty = new Specialty(specialtyName, specialtyPrice);
+          specialties.Add(newSpecialty);
+        }
+        conn.Close();
+        if (conn != null)
+        {
+          conn.Dispose();
+        }
+        return specialties;
+    }
   }
 }

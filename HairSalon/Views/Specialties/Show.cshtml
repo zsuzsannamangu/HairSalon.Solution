@@ -1,3 +1,7 @@
+@{
+  Layout = "_Layout";
+}
+
 @using HairSalon.Models;
 
 <h1>Zsuzsi's Hair Salon</h1>
@@ -7,26 +11,27 @@
 @if (@Model["specialtyStylists"].Count != 0)
 {
   <h4>Stylists that do these services:</h4>
-  <ul>
+  <ol>
     @foreach (Stylist stylist in @Model["specialtyStylists"])
     {
       <li>@stylist.GetStylistName()
       </li>
     }
-  </ul>
+  </ol>
 }
 
 <h4>Add a stylist to this specialty:</h4>
 
-<form action='/specialtys/@Model["selectedSpecialty"]._specialtyId/stylists/new' method='post'>
+<form action='/specialties/@Model["selectedSpecialty"]._specialtyId/stylists/new' method='post'>
   <label for='stylistId'>Select a stylist</label>
   <select id='stylistId' name='stylistId' type='text'>
     @foreach (var stylist in @Model["allStylists"])
     {
-      <option value='@stylist._stylistId'>@stylist._stylistName</option>
+      <option value='@stylist.GetId()'>@stylist.GetStylistName()</option>
     }
   </select>
   <button type='submit'>Add</button>
 </form>
 
 <p><a href="/">Return to Home Page</a></p>
+<p><a href="/specialties">Return to the list of specialties</a></p>

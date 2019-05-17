@@ -12,18 +12,33 @@
 }
 </ol>
 
+@if (@Model["stylistSpecialties"].Count != 0)
+{
+  <h4>This stylist does these services:</h4>
+  <ul>
+    @foreach (var specialty in @Model["stylistSpecialties"])
+    {
+      <li>@specialty._specialtyName, @specialty._specialtyPrice
+      </li>
+    }
+  </ul>
+}
+
+<h4>Add a specialty to this stylist:</h4>
+
+<form action='/stylists/@Model["stylist"].GetId()/specialties/new' method='post'>
+  <label for='specialtyId'>Select a specialty</label>
+  <select id='specialtyId' name='specialtyId' type='text'>
+
+    @foreach (var specialty in @Model["allSpecialties"])
+    {
+      <option value='@specialty._specialtyId'>@specialty._specialtyName</option>
+    }
+
+  </select>
+  <button type='submit'>Add</button>
+</form>
+
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
 <p><a href='/stylists'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
-
-@* <ol>
-@foreach (var stylist in @Model)
-{
-  <li>@stylist.GetStylistName()</li>
-  // <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetClientName()</a></li>
-}
-</ol> *@
-
-@* <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
-<p><a href='/stylists'>Return to stylist list</a></p>
-<p><a href='/'>Return to Main Page</a></p> *@
