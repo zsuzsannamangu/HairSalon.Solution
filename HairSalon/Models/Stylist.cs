@@ -59,7 +59,6 @@ namespace HairSalon.Models
       }
 
       return foundStylist;
-      // return _instances[searchId-1];
     }
 
     public static void ClearAll()
@@ -249,5 +248,33 @@ namespace HairSalon.Models
         conn.Close();
       }
     }
+
+    public void Edit(string newBio)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+
+      cmd.CommandText = @"UPDATE stylists SET bio = @newBio WHERE id = @searchId;";
+      MySqlParameter searchId = new MySqlParameter();
+      searchId.ParameterName = "@searchId";
+      searchId.Value = _id;
+      cmd.Parameters.Add(searchId);
+
+      MySqlParameter bio = new MySqlParameter();
+      bio.ParameterName = "@newBio";
+      bio.Value = newBio;
+      cmd.Parameters.Add(bio);
+
+      cmd.ExecuteNonQuery();
+      _bio = newBio;
+
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
   }
 }

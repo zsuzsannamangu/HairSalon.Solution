@@ -44,14 +44,15 @@
 
 <h4>Add a client to this stylist:</h4>
 
-<form action='/stylists/@Model["stylist"].GetId()/clients/new' method='post'>
+<form action='/stylists/@Model["stylist"].GetId()' method='post'>
   <label for='clientName'>Client name</label>
   <input id='clientName' name='clientName' type='text'>
   <label for='clientPhone'>Client phone number</label>
   <input id='clientPhone' name='clientPhone' type='text'>
   <button type='submit'>Add client</button>
 </form>
-
+<br>
+<p><a href='/stylists/@Model["stylist"].GetId()/edit'>Edit bio of this stylist</a></p>
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
 <p><a href='/stylists'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>

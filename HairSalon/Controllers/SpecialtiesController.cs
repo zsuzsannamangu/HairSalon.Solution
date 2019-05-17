@@ -33,7 +33,7 @@ namespace HairSalon.Controllers
     }
 
     [HttpPost("/specialties/delete")]
-    public ActionResult Delete()
+    public ActionResult DeleteAll()
     {
       Specialty.ClearAll();
       return View();
@@ -61,6 +61,16 @@ namespace HairSalon.Controllers
       return RedirectToAction("Show",  new { id = specialtiesId });
     }
 
+    // [HttpPost("/specialties/{specialtiesId}/delete-specialty")]
+    // public ActionResult DeleteSpecialty(int specialtyId)
+    // {
+    //   Specialty selectedSpecialty = Specialty.Find(specialtyId);
+    //   selectedSpecialty.DeleteSpecialty(specialtyId);
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   List<Specialty> specialtyStylists = selectedSpecialty.GetStylists();
+    //   model.Add("selectedSpecialty", selectedSpecialty);
+    //   return RedirectToAction("Index", "Specialties");
+    // }
   }
 
 }

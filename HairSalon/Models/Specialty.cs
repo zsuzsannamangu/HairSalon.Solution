@@ -23,7 +23,7 @@ namespace HairSalon.Models
       conn.Open();
 
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"DELETE FROM specialties;";
+      cmd.CommandText = @"DELETE * FROM specialties;";
       cmd.ExecuteNonQuery();
       conn.Close();
       if (conn != null)
@@ -212,6 +212,32 @@ namespace HairSalon.Models
       specialtyIdParameter.Value = this._specialtyId;
       cmd.Parameters.Add(specialtyIdParameter);
       cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
+    }
+
+    public void DeleteSpecialty (int specialtyId)
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+      var cmd = conn.CreateCommand() as MySqlCommand;
+
+      // Specialty selectedSpecialty = Specialty.Find(specialtyId);
+      // Dictionary<string, object> model = new Dictionary<string, object>();
+      // List<Stylist> specialtyStylist = selectedSpecialty.GetStylists();
+      // model.Add("selectedSpecialty", selectedSpecialty);
+      //
+      // foreach (Stylist stylist in specialtyStylist)
+      // {
+      //   stylist.Delete();
+      // }
+
+      cmd.CommandText = @"DELETE FROM specialties WHERE id = @thisId;";
+      cmd.Parameters.AddWithValue("@thisId", _specialtyId);
+      cmd.ExecuteNonQuery();
+
       if (conn != null)
       {
         conn.Close();

@@ -34,6 +34,17 @@ namespace HairSalon.Controllers
       Client.ClearAll();
       return View();
     }
+    // 
+    // HttpGet("/stylists/{stylistId}/items/{itemId}/edit")]
+    // public ActionResult Edit(int categoryId, int itemId)
+    // {
+    //   Dictionary<string, object> model = new Dictionary<string, object>();
+    //   Category category = Category.Find(categoryId);
+    //   model.Add("category", category);
+    //   Item item = Item.Find(itemId);
+    //   model.Add("item", item);
+    //   return View(model);
+    // }
 
   }
 }
