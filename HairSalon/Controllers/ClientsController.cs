@@ -46,7 +46,7 @@ namespace HairSalon.Controllers
     public ActionResult DeleteAll()
     {
       Client.ClearAll();
-      return View();
+      return View("/stylists");
     }
 
     [HttpPost("/stylists/{stylistId}/clients/{clientId}/delete")]
@@ -55,7 +55,7 @@ namespace HairSalon.Controllers
       Dictionary<string, object> model = new Dictionary<string, object>();
       Stylist selectedStylist = Stylist.Find(stylistId);
       Client selectedClient = Client.Find(clientId);
-      client.Delete();
+      selectedClient.Delete();
       model.Add("selectedStylist", selectedStylist);
       model.Add("selectedClient", selectedClient);
       return Redirect("/stylists");
@@ -70,6 +70,18 @@ namespace HairSalon.Controllers
       model.Add("selectedStylist", selectedStylist);
       model.Add("selectedClient", selectedClient);
       return View(model);
+    }
+
+    [HttpPost("/stylists/{stylistId}/clients/{clientId}")]
+    public ActionResult Update(int stylistId, int clientId, string newName, string newPhone)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      Stylist selectedStylist = Stylist.Find(stylistId);
+      Client selectedClient = Client.Find(clientId);
+      selectedClient.Edit(newName, newPhone);
+      model.Add("selectedStylist", selectedStylist);
+      model.Add("selectedClient", selectedClient);
+      return View("Show", model);
     }
 
   }

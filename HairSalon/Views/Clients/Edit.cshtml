@@ -1,0 +1,19 @@
+@{
+  Layout = "_Layout";
+}
+
+<h1>Zsuzsi's Hair Salon</h1>
+<hr>
+
+<h3>Edit @Model["selectedClient"].GetClientName()'s name: @Model["selectedClient"].GetClientName()</h3>
+
+<form action="/stylists/@Model["stylist"].GetId()/clients/@Model["client"].GetId()" method="post">
+  <label for="newName">Name:</label>
+  <input type="text" name="newName" value="@Model["selectedClient"].GetName()">
+  <label for="newPhone">Phone:</label>
+  <input type="text" name="newPhone" value="@Model["selectedClient"].GetPhone()">
+  <button type="submit">Edit</button>
+</form>
+
+<br>
+<p><a href='/stylists/@Model["stylist"].GetId()'</a>Back to @Model["stylist"].GetStylistName()'s page</p>

@@ -61,9 +61,10 @@ namespace HairSalon.Controllers
       Stylist selectedStylist = Stylist.Find(stylistId);
       Client newClient = new Client(clientName, clientPhone, stylistId);
       newClient.Save();
-      List<Client> stylistsClients = selectedStylist.GetClients();
-      model.Add("clients", stylistsClients);
-      model.Add("stylist", selectedStylist);
+      // List<Client> stylistsClients = selectedStylist.GetClients();
+      selectedStylist.GetClients();
+      model.Add("newclient", newClient);
+      model.Add("selectedStylist", selectedStylist);
       return View("Show", model);
     }
 
@@ -74,6 +75,19 @@ namespace HairSalon.Controllers
       Specialty specialty = Specialty.Find(specialtyId);
       stylist.AddSpecialty(specialty);
       return RedirectToAction("Show",  new { id = stylistId });
+    }
+
+    [HttpGet("/stylists/{stylistId}/delete")]
+    public ActionResult Delete(int stylistId)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+
+      Stylist stylist = Stylist.Find(stylistId);
+      model.Add("stylist", stylist);
+      // Client client = Client.Find(clientId);
+      // model.Add("client", client);
+
+      return Redirect("/stylists");
     }
 
     [HttpGet("/stylists/{stylistId}/edit")]
@@ -100,29 +114,6 @@ namespace HairSalon.Controllers
 
     }
 
-    [HttpGet("/stylists/{stylistId}/delete")]
-    public ActionResult Delete(int stylistId)
-    {
-      Dictionary<string, object> model = new Dictionary<string, object>();
-
-      Stylist stylist = Stylist.Find(stylistId);
-      model.Add("stylist", stylist);
-      // Client client = Client.Find(clientId);
-      // model.Add("client", client);
-
-      return View(model);
-    }
-
-    [HttpPost("/stylists/{stylistId}/destroy")]
-    public ActionResult Destroy(int stylistId)
-    {
-      Stylist stylist = Stylist.Find(stylistId);
-      stylist.Delete();
-      Dictionary<string, object> model = new Dictionary<string, object>();
-      model.Add("stylist", stylist);
-      return View("Show", model);
-
-    }
 
 
   }

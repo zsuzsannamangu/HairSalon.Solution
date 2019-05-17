@@ -6,13 +6,20 @@
 <p>@Model["stylist"].GetBio()</p>
 <hr>
 
-<h4>@Model["stylist"].GetStylistName()'s clients:</h4>
-<ol>
-@foreach (var client in @Model["clients"])
+@if (@Model["clients"].Count != 0)
 {
-  <li>Client Name:<a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'> @client.GetClientName()</a> <br>Phone Number: @client.GetPhone()</li>
+  <h4>@Model["stylist"].GetStylistName()'s clients:</h4>
+  <ol>
+  @foreach (var client in @Model["clients"])
+  {
+    <li>Client Name:<a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'> @client.GetClientName()</a> <br>Phone Number: @client.GetPhone()</li>
+  }
+  </ol>
+  <form action= '/clients/delete' method="post">
+    <button type="submit" name="button"> Delete all clients </button>
+  </form>
 }
-</ol>
+
 
 @if (@Model["stylistSpecialties"].Count != 0)
 {
@@ -41,9 +48,12 @@
   <button type='submit'>Add</button>
 </form>
 
+<form action= '/stylists/@Model["stylist"].GetId()/delete' method="post">
+  <button type="submit" name="button"> Delete this stylist </button>
+</form>
+
 <br>
 <p><a href='/stylists/@Model["stylist"].GetId()/edit'>Edit bio of this stylist</a></p>
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
-<p><a href='/stylists/@Model["stylist"].GetId()/delete'>Delete this stylist</a></p>
 <p><a href='/stylists'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>
