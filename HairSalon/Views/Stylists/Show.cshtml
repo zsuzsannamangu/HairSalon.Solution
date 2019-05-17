@@ -2,22 +2,21 @@
   Layout = "_Layout";
 }
 
-<h3>Here are all the details of @Model["stylist"].GetStylistName():</h3>
-
-<h4>@Model["stylist"].GetStylistName()</h4>
+<h2>About @Model["stylist"].GetStylistName()</h2>
 <p>@Model["stylist"].GetBio()</p>
+<hr>
 
+<h4>@Model["stylist"].GetStylistName()'s clients:</h4>
 <ol>
 @foreach (var client in @Model["clients"])
 {
-  <li>Client Name: @client.GetClientName() <br>Phone Number: @client.GetPhone()</li>
-  /* <li><a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'>@client.GetClientName()</a></li> */
+  <li>Client Name:<a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'> @client.GetClientName()</a> <br>Phone Number: @client.GetPhone()</li>
 }
 </ol>
 
 @if (@Model["stylistSpecialties"].Count != 0)
 {
-  <h4>This stylist does these services:</h4>
+  <h4>@Model["stylist"].GetStylistName()'s services:</h4>
   <ul>
     @foreach (var specialty in @Model["stylistSpecialties"])
     {
@@ -27,7 +26,7 @@
   </ul>
 }
 
-<h4>Add a specialty to this stylist:</h4>
+<h4>Add a service @Model["stylist"].GetStylistName():</h4>
 
 <form action='/stylists/@Model["stylist"].GetId()/specialties/new' method='post'>
   <label for='specialtyId'>Select a specialty</label>
@@ -42,17 +41,9 @@
   <button type='submit'>Add</button>
 </form>
 
-<h4>Add a client to this stylist:</h4>
-
-<form action='/stylists/@Model["stylist"].GetId()' method='post'>
-  <label for='clientName'>Client name</label>
-  <input id='clientName' name='clientName' type='text'>
-  <label for='clientPhone'>Client phone number</label>
-  <input id='clientPhone' name='clientPhone' type='text'>
-  <button type='submit'>Add client</button>
-</form>
 <br>
 <p><a href='/stylists/@Model["stylist"].GetId()/edit'>Edit bio of this stylist</a></p>
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
+<p><a href='/stylists/@Model["stylist"].GetId()/delete'>Delete this stylist</a></p>
 <p><a href='/stylists'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>

@@ -89,11 +89,35 @@ namespace HairSalon.Controllers
       return View(model);
     }
 
-    [HttpPost("/stylists/{stylistId}")]
+    [HttpPost("/stylists/{stylistId}/update")]
     public ActionResult Update(int stylistId, string newBio)
     {
       Stylist stylist = Stylist.Find(stylistId);
       stylist.Edit(newBio);
+      Dictionary<string, object> model = new Dictionary<string, object>();
+      model.Add("stylist", stylist);
+      return View("Show", model);
+
+    }
+
+    [HttpGet("/stylists/{stylistId}/delete")]
+    public ActionResult Delete(int stylistId)
+    {
+      Dictionary<string, object> model = new Dictionary<string, object>();
+
+      Stylist stylist = Stylist.Find(stylistId);
+      model.Add("stylist", stylist);
+      // Client client = Client.Find(clientId);
+      // model.Add("client", client);
+
+      return View(model);
+    }
+
+    [HttpPost("/stylists/{stylistId}/destroy")]
+    public ActionResult Destroy(int stylistId)
+    {
+      Stylist stylist = Stylist.Find(stylistId);
+      stylist.Delete();
       Dictionary<string, object> model = new Dictionary<string, object>();
       model.Add("stylist", stylist);
       return View("Show", model);
