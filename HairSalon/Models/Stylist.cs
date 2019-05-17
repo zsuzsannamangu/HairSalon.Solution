@@ -8,19 +8,22 @@ namespace HairSalon.Models
   {
     private string _name;
     private int _id;
-    // private List<Client> _clients;
+    private string _bio;
 
-    public Stylist(string stylistName)
+    public Stylist(string stylistName, string bio)
     {
       _name = stylistName;
-      // _instances.Add(this);
-      // _id = _instances.Count;
-      // _clients = new List<Client>{};
+      _bio = bio;
     }
 
     public string GetStylistName()
     {
       return _name;
+    }
+
+    public string GetBio()
+    {
+      return _bio;
     }
 
     public int GetId()
@@ -33,10 +36,6 @@ namespace HairSalon.Models
       _id = id;
     }
 
-    public static void ClearAll()
-    {
-      // _instances.Clear();
-    }
 
     public static Stylist Find(int searchId)
     {
@@ -50,7 +49,8 @@ namespace HairSalon.Models
       rdr.Read();
       int id = rdr.GetInt32(0);
       string name = rdr.GetString(1);
-      Stylist foundStylist = new Stylist(name);
+      string bio = rdr.GetString(2);
+      Stylist foundStylist = new Stylist(name, bio);
       foundStylist.SetId(id);
       conn.Close();
       if (conn != null)
@@ -62,6 +62,20 @@ namespace HairSalon.Models
       // return _instances[searchId-1];
     }
 
+    public static void ClearAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
     public static List<Stylist> GetAll()
     {
       List<Stylist> allStylists = new List<Stylist> {};
@@ -75,7 +89,8 @@ namespace HairSalon.Models
 
         int Id = rdr.GetInt32(0);
         string stylistName = rdr.GetString(1);
-        Stylist newStylist = new Stylist(stylistName);
+        string bio = rdr.GetString(2);
+        Stylist newStylist = new Stylist(stylistName, bio);
         newStylist.SetId(Id);
         allStylists.Add(newStylist);
         }
@@ -107,12 +122,18 @@ namespace HairSalon.Models
       MySqlConnection conn = DB.Connection();
       conn.Open();
       var cmd = conn.CreateCommand() as MySqlCommand;
-      cmd.CommandText = @"INSERT INTO stylists (name) VALUES (@stylistName);";
+      cmd.CommandText = @"INSERT INTO stylists (name, bio) VALUES (@stylistName, @bio);";
       // cmd.Parameters.AddWithValue("@stylistName", _name);
       MySqlParameter name = new MySqlParameter();
       name.ParameterName = "@stylistName";
       name.Value = this._name;
       cmd.Parameters.Add(name);
+
+      MySqlParameter bio = new MySqlParameter();
+      bio.ParameterName = "@bio";
+      bio.Value = this._bio;
+      cmd.Parameters.Add(bio);
+
       cmd.ExecuteNonQuery();
       _id = (int) cmd.LastInsertedId;
 
@@ -209,6 +230,24 @@ namespace HairSalon.Models
           conn.Dispose();
         }
         return specialties;
+    }
+
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM stylists WHERE id = @StylistId; DELETE FROM services WHERE stylists_id = @StylistId;";
+      MySqlParameter stylistIdParameter = new MySqlParameter();
+      stylistIdParameter.ParameterName = "@StylistId";
+      stylistIdParameter.Value = this.GetId();
+      cmd.Parameters.Add(stylistIdParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
   }
 }

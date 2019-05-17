@@ -17,6 +17,21 @@ namespace HairSalon.Models
       _specialtyPrice = specialtyPrice;
     }
 
+    public static void ClearAll()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM specialties;";
+      cmd.ExecuteNonQuery();
+      conn.Close();
+      if (conn != null)
+      {
+        conn.Dispose();
+      }
+    }
+
     public static List<Specialty> GetAll()
     {
       List<Specialty> allSpecialties = new List<Specialty> {};
@@ -172,8 +187,9 @@ namespace HairSalon.Models
       {
         // int stylistId = rdr.GetInt32(0);
         string stylistName = rdr.GetString(1);
+        string bio = rdr.GetString(2);
         // string stylistPrice = rdr.GetString(2);
-        Stylist newStylist = new Stylist(stylistName);
+        Stylist newStylist = new Stylist(stylistName, bio);
         stylists.Add(newStylist);
       }
       conn.Close();
@@ -182,6 +198,24 @@ namespace HairSalon.Models
         conn.Dispose();
       }
       return stylists;
+    }
+
+    public void Delete()
+    {
+      MySqlConnection conn = DB.Connection();
+      conn.Open();
+
+      var cmd = conn.CreateCommand() as MySqlCommand;
+      cmd.CommandText = @"DELETE FROM specialties WHERE id = @SpecialtyId; DELETE FROM services WHERE specialties_id = @SpecialtyId;";
+      MySqlParameter specialtyIdParameter = new MySqlParameter();
+      specialtyIdParameter.ParameterName = "@SpecialtyId";
+      specialtyIdParameter.Value = this._specialtyId;
+      cmd.Parameters.Add(specialtyIdParameter);
+      cmd.ExecuteNonQuery();
+      if (conn != null)
+      {
+        conn.Close();
+      }
     }
   }
 }

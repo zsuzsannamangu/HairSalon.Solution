@@ -4,6 +4,9 @@
 
 <h3>Here are all the details of @Model["stylist"].GetStylistName():</h3>
 
+<h4>@Model["stylist"].GetStylistName()</h4>
+<p>@Model["stylist"].GetBio()</p>
+
 <ol>
 @foreach (var client in @Model["clients"])
 {
@@ -37,6 +40,16 @@
 
   </select>
   <button type='submit'>Add</button>
+</form>
+
+<h4>Add a client to this stylist:</h4>
+
+<form action='/stylists/@Model["stylist"].GetId()/clients/new' method='post'>
+  <label for='clientName'>Client name</label>
+  <input id='clientName' name='clientName' type='text'>
+  <label for='clientPhone'>Client phone number</label>
+  <input id='clientPhone' name='clientPhone' type='text'>
+  <button type='submit'>Add client</button>
 </form>
 
 <p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
