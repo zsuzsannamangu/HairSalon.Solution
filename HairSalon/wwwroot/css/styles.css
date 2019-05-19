@@ -16,8 +16,17 @@ a, a:hover {
 }
 
 h1 {
-  font-size: 80px;
-  text-shadow: 1px 1px white;
+  font-size: 90px;
+  text-shadow: 1px 1px black;
+  margin-top: 20vh;
+  color: #F6AA1C;
+}
+
+h2 {
+  font-size: 50px;
+  text-shadow: 1px 1px black;
+  margin-top: 10vh;
+  color: #F6AA1C;
 }
 
 .menu ul {
@@ -32,19 +41,25 @@ h1 {
 
 .menu li a {
   display: block;
-  color: #393f4d;
+  color: white;
   text-align: center;
   padding: 8px 16px;
   text decoration: none;
-  background-color: #DCEED1;
+  background-color: #914D76;
   margin-left: 1vw;
   margin-right: 1vw;
+  font-family: 'Raleway', sans-serif;
 }
 
 .menu li a:hover {
-  color: black;
+  color: #CEF7A0;
+  text-decoration: none;
 }
 
 input, button, select, textarea {
+  color: black;
+}
+
+button {
   color: black;
 }

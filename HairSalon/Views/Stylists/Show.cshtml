@@ -15,10 +15,17 @@
     <li>Client Name:<a href='/stylists/@Model["stylist"].GetId()/clients/@client.GetId()'> @client.GetClientName()</a> <br>Phone Number: @client.GetPhone()</li>
   }
   </ol>
-  <form action= '/clients/delete' method="post">
-    <button type="submit" name="button"> Delete all clients </button>
-  </form>
+
+<br>
+<form action= '/clients/delete' method="post">
+  <button type="submit" name="button"> Delete all clients </button>
+</form>
 }
+<br>
+<p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
+
+<br>
+<br>
 
 
 @if (@Model["stylistSpecialties"].Count != 0)
@@ -48,12 +55,15 @@
   <button type='submit'>Add</button>
 </form>
 
+<br>
+<br>
+
 <form action= '/stylists/@Model["stylist"].GetId()/delete' method="post">
   <button type="submit" name="button"> Delete this stylist </button>
 </form>
 
 <br>
 <p><a href='/stylists/@Model["stylist"].GetId()/edit'>Edit bio of this stylist</a></p>
-<p><a href='/stylists/@Model["stylist"].GetId()/clients/new'>Add a new client</a></p>
+<hr>
 <p><a href='/stylists'>Return to stylist list</a></p>
 <p><a href='/'>Return to Main Page</a></p>

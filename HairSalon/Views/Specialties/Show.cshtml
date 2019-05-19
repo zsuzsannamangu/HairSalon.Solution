@@ -1,10 +1,9 @@
+@using HairSalon.Models;
 @{
   Layout = "_Layout";
 }
 
-@using HairSalon.Models;
 
-<h1>Zsuzsi's Hair Salon</h1>
 <h2>Specialty: @Model["selectedSpecialty"]._specialtyName</h2>
 <hr />
 
@@ -19,7 +18,7 @@
     }
   </ol>
 }
-
+<br>
 <h4>Add a stylist to this specialty:</h4>
 
 <form action='/specialties/@Model["selectedSpecialty"]._specialtyId/stylists/new' method='post'>
@@ -32,8 +31,8 @@
   </select>
   <button type='submit'>Add</button>
 </form>
-
+<br>
 <h4>Delete this specialty:<a href="/specialties"> @Model["selectedSpecialty"]._specialtyName</a></h4>
 
-<p><a href="/">Return to Home Page</a></p>
+<br>
 <p><a href="/specialties">Return to the list of specialties</a></p>

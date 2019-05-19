@@ -1,12 +1,12 @@
 @{
-  Layout = "_Layout";
+    Layout = "_Layout";
 }
 
 <h2>Client:</h2>
 <hr>
 <h4>Name: @Model["selectedClient"].GetClientName()</h4>
 <h4>Phone: @Model["selectedClient"].GetPhone()</h4>
-
+<br>
 <form action= '/stylists/@Model["selectedStylist"].GetId()/clients/@Model["selectedClient"].GetId()/delete' method="post">
   <button type="submit" name="button"> Delete this client </button>
 </form>
