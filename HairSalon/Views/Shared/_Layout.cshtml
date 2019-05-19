@@ -4,13 +4,14 @@
     <meta charset="utf-8">
     <title>Hair Salon</title>
     <link rel='stylesheet' href='https://maxcdn.bootstrapcdn.com/bootstrap/3.2.0/css/bootstrap.min.css'>
-    <link rel="stylesheet" href="~/css/styles.css">
-    <link href="https://fonts.googleapis.com/css?family=Poppins" rel="stylesheet">
+    <link rel="stylesheet" href="../css/styles.css">
+    <link href="https://fonts.googleapis.com/css?family=Raleway|Roboto&display=swap" rel="stylesheet">
   </head>
-  <body>
+  <body background="../img/hair2.jpg">
     @ViewData["Message"]
     <div class="container">
-    @RenderBody()
+      @Html.Partial("Header")
+      @RenderBody()
     </div>
   </body>
 </html>

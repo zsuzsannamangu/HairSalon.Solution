@@ -10,7 +10,7 @@ namespace HairSalon.Models
     private string _phone;
     private int _stylist_id;
 
-    public Client (string name, string phone, int stylist_id = 0)
+    public Client (string name, string phone, int stylist_id)
     {
       _name = name;
       _phone = phone;
@@ -80,7 +80,8 @@ namespace HairSalon.Models
       int id = rdr.GetInt32(0);
       string name = rdr.GetString(1);
       string phone = rdr.GetString(2);
-      Client foundClient = new Client(name, phone);
+      int stylist_id = rdr.GetInt32(3);
+      Client foundClient = new Client(name, phone, stylist_id);
       foundClient.SetId(id);
       conn.Close();
       if (conn != null)
@@ -101,12 +102,12 @@ namespace HairSalon.Models
       MySqlDataReader rdr = cmd.ExecuteReader() as MySqlDataReader;
         while(rdr.Read())
         {
-        int clientId = rdr.GetInt32(0);
-        string clientName = rdr.GetString(1);
-        string clientPhone = rdr.GetString(2);
-        int stylist_id = rdr.GetInt32(3);
-        Client newClient = new Client(clientName, clientPhone, stylist_id);
-        allClients.Add(newClient);
+          int clientId = rdr.GetInt32(0);
+          string clientName = rdr.GetString(1);
+          string clientPhone = rdr.GetString(2);
+          int stylist_id = rdr.GetInt32(3);
+          Client newClient = new Client(clientName, clientPhone, stylist_id);
+          allClients.Add(newClient);
         }
       conn.Close();
       if (conn != null)
@@ -170,12 +171,12 @@ namespace HairSalon.Models
       cmd.Parameters.Add(searchId);
 
       MySqlParameter name = new MySqlParameter();
-      name.ParameterName = "@newBio";
+      name.ParameterName = "@newName";
       name.Value = newName;
       cmd.Parameters.Add(name);
 
       MySqlParameter phone = new MySqlParameter();
-      phone.ParameterName = "@newBio";
+      phone.ParameterName = "@newPhone";
       phone.Value = newPhone;
       cmd.Parameters.Add(phone);
 

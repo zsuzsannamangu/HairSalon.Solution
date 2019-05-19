@@ -1,3 +1,50 @@
 body {
-  color: red;
+  color: white;
+  margin-top: 5vh;
+}
+
+h1, h2, h3 {
+  font-family: 'Roboto', sans-serif;
+}
+
+h4, h5, p {
+  font-family: 'Raleway', sans-serif;
+}
+
+a, a:hover {
+  color: white;
+}
+
+h1 {
+  font-size: 80px;
+  text-shadow: 1px 1px white;
+}
+
+.menu ul {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+}
+
+.menu li {
+  display: inline-block;
+}
+
+.menu li a {
+  display: block;
+  color: #393f4d;
+  text-align: center;
+  padding: 8px 16px;
+  text decoration: none;
+  background-color: #DCEED1;
+  margin-left: 1vw;
+  margin-right: 1vw;
+}
+
+.menu li a:hover {
+  color: black;
+}
+
+input, button, select, textarea {
+  color: black;
 }

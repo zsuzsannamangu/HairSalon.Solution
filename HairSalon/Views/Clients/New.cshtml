@@ -4,7 +4,7 @@
   Layout = "_Layout";
 }
 
-<h1>Add a new client to @Model.GetStylistName()</h1>
+<h1>Add a new client to @Model.GetStylistName() @Model.GetId()</h1>
 
 <form action='/clients' method='post'>
   <input id='stylistId' name='stylistId' type='hidden' value='@Model.GetId()'>
